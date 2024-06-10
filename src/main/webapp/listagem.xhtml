@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+<h:head>
+    <title>Listagem de Canetas</title>
+    <style>
+	    .C_Azul {
+	        color: blue;
+	    }
+	    .C_Preta {
+	        color: black;
+	    }
+	    .C_Vermelha {
+	        color: red;
+	    }
+    </style>
+</h:head>
+<h:body>
+    <h:form>
+        <p:dataTable value="#{canetaBean.canetas}" var="caneta">
+            <p:column headerText="ID">
+                <h:outputText value="#{caneta.id}" />
+            </p:column>
+            <p:column headerText="Marca">
+                <h:outputText value="#{caneta.marca}" />
+            </p:column>
+            <p:column headerText="Modelo">
+                <h:outputText value="#{caneta.modelo}" />
+            </p:column>
+            <p:column headerText="Cor">
+                <h:outputText value="#{caneta.cor}" class="C_#{caneta.cor}"/>
+            </p:column>
+            <p:column headerText="Ações">
+                <h:commandButton value="Excluir" action="#{canetaBean.excluir(caneta)}" update="messages, listagem"/>
+                <h:commandButton value="Selecionar" action="#{canetaBean.selecionar(caneta)}" update="messages"/>
+            </p:column>
+            
+        </p:dataTable>
+        <p:commandButton value="Cadastrar Nova Caneta" action="index.xhtml" style="margin-right: 10px; margin-top: 10px"  />
+        <p:commandButton value="Contar Canetas por Cor" action="#{canetaBean.contarCanetasPorCor}" update="messages" style="margin-top: 10px"/>
+        
+    </h:form>
+    <p:messages id="messages" showDetail="true" />
+</h:body>
+</html>
